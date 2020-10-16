@@ -80,7 +80,7 @@ def get_xp_val(xp):
 
 
 ############################################### main
-root_dir = '/b/home/uha/hfawaz-datas/temp-dl-tsc/'
+root_dir = '/mnt/nfs/proj/in-vitro/Leonardo/inception/'
 xps = ['use_bottleneck', 'use_residual', 'nb_filters', 'depth',
        'kernel_size', 'batch_size']
 

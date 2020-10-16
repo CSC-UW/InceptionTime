@@ -1,0 +1,15 @@
+[I 21:33:15.276 LabApp] JupyterLab extension loaded from /home/leonardo.barbosa/.conda/envs/inceptiont/lib/python3.7/site-packages/jupyterlab
+[I 21:33:15.276 LabApp] JupyterLab application directory is /home/leonardo.barbosa/.conda/envs/inceptiont/share/jupyter/lab
+[I 21:33:15.285 LabApp] Serving notebooks from local directory: /home/leonardo.barbosa/projects/voltametry/InceptionTime
+[I 21:33:15.285 LabApp] Jupyter Notebook 6.1.4 is running at:
+[I 21:33:15.285 LabApp] http://172.21.13.52:20209/?token=2a1fe940d3b54185ca102f345bd8a2821eb24cdf85595d78
+[I 21:33:15.285 LabApp]  or http://127.0.0.1:20209/?token=2a1fe940d3b54185ca102f345bd8a2821eb24cdf85595d78
+[I 21:33:15.285 LabApp] Use Control-C to stop this server and shut down all kernels (twice to skip confirmation).
+[C 21:33:15.327 LabApp] 
+    
+    To access the notebook, open this file in a browser:
+        file:///home/leonardo.barbosa/.local/share/jupyter/runtime/nbserver-427444-open.html
+    Or copy and paste one of these URLs:
+        http://172.21.13.52:20209/?token=2a1fe940d3b54185ca102f345bd8a2821eb24cdf85595d78
+     or http://127.0.0.1:20209/?token=2a1fe940d3b54185ca102f345bd8a2821eb24cdf85595d78
+slurmstepd: error: *** JOB 12841 ON hawking-gnode02 CANCELLED AT 2020-10-12T21:33:22 ***

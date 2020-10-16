@@ -1,0 +1,30 @@
+[I 21:33:38.493 LabApp] JupyterLab extension loaded from /home/leonardo.barbosa/.conda/envs/inceptiont/lib/python3.7/site-packages/jupyterlab
+[I 21:33:38.494 LabApp] JupyterLab application directory is /home/leonardo.barbosa/.conda/envs/inceptiont/share/jupyter/lab
+[I 21:33:38.501 LabApp] Serving notebooks from local directory: /home/leonardo.barbosa/projects/voltametry/InceptionTime
+[I 21:33:38.501 LabApp] Jupyter Notebook 6.1.4 is running at:
+[I 21:33:38.501 LabApp] http://172.21.13.51:20209/?token=ad49be206c7ba79102bd2fd9f8bc3d4ca17a4176286394d5
+[I 21:33:38.501 LabApp]  or http://127.0.0.1:20209/?token=ad49be206c7ba79102bd2fd9f8bc3d4ca17a4176286394d5
+[I 21:33:38.501 LabApp] Use Control-C to stop this server and shut down all kernels (twice to skip confirmation).
+[C 21:33:38.533 LabApp] 
+    
+    To access the notebook, open this file in a browser:
+        file:///home/leonardo.barbosa/.local/share/jupyter/runtime/nbserver-313907-open.html
+    Or copy and paste one of these URLs:
+        http://172.21.13.51:20209/?token=ad49be206c7ba79102bd2fd9f8bc3d4ca17a4176286394d5
+     or http://127.0.0.1:20209/?token=ad49be206c7ba79102bd2fd9f8bc3d4ca17a4176286394d5
+[I 21:34:14.367 LabApp] 302 GET /?token=ad49be206c7ba79102bd2fd9f8bc3d4ca17a4176286394d5 (172.21.13.10) 1.33ms
+[W 21:34:15.838 LabApp] Could not determine jupyterlab build status without nodejs
+[I 21:34:18.217 LabApp] New terminal with automatic name: 1
+[I 21:34:18.775 LabApp] Kernel started: 57c2b727-7b3a-4390-9db7-f626bcefcff8, name: python3
+[I 21:34:18.800 LabApp] Kernel started: d3a7cc10-143f-4382-81cb-74927086bcb3, name: python3
+[I 21:34:26.750 LabApp] New terminal with automatic name: 2
+[I 21:36:41.365 LabApp] Kernel shutdown: d3a7cc10-143f-4382-81cb-74927086bcb3
+[I 21:36:41.883 LabApp] Kernel shutdown: 57c2b727-7b3a-4390-9db7-f626bcefcff8
+[I 21:36:42.317 LabApp] Saving file at /Untitled.ipynb
+[I 21:36:42.631 LabApp] EOF on FD 38; stopping reading
+[I 21:36:42.732 LabApp] Terminal 2 closed
+[I 21:36:43.009 LabApp] EOF on FD 17; stopping reading
+[I 21:36:43.110 LabApp] Terminal 1 closed
+[I 21:36:48.183 LabApp] Kernel started: 9cde0955-502a-4e1b-afb9-7f0a2419b7fe, name: python3
+[I 21:36:56.531 LabApp] Kernel started: a9ccc4fe-9184-45b9-b7bc-d49c64d47bbe, name: python3
+slurmstepd: error: *** JOB 12842 ON hawking-gnode01 CANCELLED AT 2020-10-12T21:39:11 ***

@@ -1,0 +1,68 @@
+[I 21:05:06.132 LabApp] JupyterLab extension loaded from /home/leonardo.barbosa/.conda/envs/inceptiont/lib/python3.7/site-packages/jupyterlab
+[I 21:05:06.132 LabApp] JupyterLab application directory is /home/leonardo.barbosa/.conda/envs/inceptiont/share/jupyter/lab
+[I 21:05:06.138 LabApp] Serving notebooks from local directory: /home/leonardo.barbosa/projects/voltametry/InceptionTime
+[I 21:05:06.138 LabApp] Jupyter Notebook 6.1.4 is running at:
+[I 21:05:06.138 LabApp] http://172.21.13.51:20209/?token=19812203f71c7e5db9dc6922ff9a6e9041a317f510f062d4
+[I 21:05:06.138 LabApp]  or http://127.0.0.1:20209/?token=19812203f71c7e5db9dc6922ff9a6e9041a317f510f062d4
+[I 21:05:06.138 LabApp] Use Control-C to stop this server and shut down all kernels (twice to skip confirmation).
+[C 21:05:06.171 LabApp] 
+    
+    To access the notebook, open this file in a browser:
+        file:///home/leonardo.barbosa/.local/share/jupyter/runtime/nbserver-309678-open.html
+    Or copy and paste one of these URLs:
+        http://172.21.13.51:20209/?token=19812203f71c7e5db9dc6922ff9a6e9041a317f510f062d4
+     or http://127.0.0.1:20209/?token=19812203f71c7e5db9dc6922ff9a6e9041a317f510f062d4
+[I 21:05:59.589 LabApp] 302 GET /lab (172.21.13.10) 1.75ms
+[I 21:06:07.617 LabApp] 302 POST /login?next=%2Flab (172.21.13.10) 2.51ms
+[W 21:06:10.954 LabApp] Could not determine jupyterlab build status without nodejs
+[W 21:06:13.963 LabApp] 404 GET /api/contents/four_analyte_not_prob_LB.ipynb?content=0&1602551173882 (172.21.13.10): No such file or directory: four_analyte_not_prob_LB.ipynb
+[W 21:06:13.963 LabApp] No such file or directory: four_analyte_not_prob_LB.ipynb
+[W 21:06:13.964 LabApp] 404 GET /api/contents/four_analyte_not_prob_LB.ipynb?content=0&1602551173882 (172.21.13.10) 8.37ms referer=http://127.0.0.1:20209/lab
+[W 21:06:13.964 LabApp] 404 GET /api/contents/four_analyte_inspect_convergence_LB.ipynb?content=0&1602551173884 (172.21.13.10): No such file or directory: four_analyte_inspect_convergence_LB.ipynb
+[W 21:06:13.964 LabApp] No such file or directory: four_analyte_inspect_convergence_LB.ipynb
+[W 21:06:13.964 LabApp] 404 GET /api/contents/four_analyte_inspect_convergence_LB.ipynb?content=0&1602551173884 (172.21.13.10) 8.60ms referer=http://127.0.0.1:20209/lab
+[W 21:06:13.965 LabApp] 404 GET /api/contents/macromicro_conv_holdout.ipynb?content=0&1602551173886 (172.21.13.10): No such file or directory: macromicro_conv_holdout.ipynb
+[W 21:06:13.965 LabApp] No such file or directory: macromicro_conv_holdout.ipynb
+[W 21:06:13.965 LabApp] 404 GET /api/contents/macromicro_conv_holdout.ipynb?content=0&1602551173886 (172.21.13.10) 8.79ms referer=http://127.0.0.1:20209/lab
+[W 21:06:13.966 LabApp] 404 GET /api/contents/macromicro_explore_data.ipynb?content=0&1602551173886 (172.21.13.10): No such file or directory: macromicro_explore_data.ipynb
+[W 21:06:13.966 LabApp] No such file or directory: macromicro_explore_data.ipynb
+[W 21:06:13.966 LabApp] 404 GET /api/contents/macromicro_explore_data.ipynb?content=0&1602551173886 (172.21.13.10) 8.95ms referer=http://127.0.0.1:20209/lab
+[W 21:06:14.026 LabApp] 404 GET /api/contents/macromicro_conv_holdout_LB_BEST.ipynb?content=0&1602551173887 (172.21.13.10): No such file or directory: macromicro_conv_holdout_LB_BEST.ipynb
+[W 21:06:14.026 LabApp] No such file or directory: macromicro_conv_holdout_LB_BEST.ipynb
+[W 21:06:14.027 LabApp] 404 GET /api/contents/macromicro_conv_holdout_LB_BEST.ipynb?content=0&1602551173887 (172.21.13.10) 8.43ms referer=http://127.0.0.1:20209/lab
+[W 21:06:14.098 LabApp] 404 GET /api/contents/glmnet_glmnet_tutorial.ipynb?content=0&1602551173887 (172.21.13.10): No such file or directory: glmnet_glmnet_tutorial.ipynb
+[W 21:06:14.098 LabApp] No such file or directory: glmnet_glmnet_tutorial.ipynb
+[W 21:06:14.099 LabApp] 404 GET /api/contents/glmnet_glmnet_tutorial.ipynb?content=0&1602551173887 (172.21.13.10) 3.22ms referer=http://127.0.0.1:20209/lab
+[W 21:06:14.102 LabApp] 404 GET /api/contents/cam_cf.ipynb?content=0&1602551173888 (172.21.13.10): No such file or directory: cam_cf.ipynb
+[W 21:06:14.102 LabApp] No such file or directory: cam_cf.ipynb
+[W 21:06:14.103 LabApp] 404 GET /api/contents/cam_cf.ipynb?content=0&1602551173888 (172.21.13.10) 3.40ms referer=http://127.0.0.1:20209/lab
+[W 21:06:14.108 LabApp] 404 GET /api/contents/glmnet_cf_hyper_select.ipynb?content=0&1602551173890 (172.21.13.10): No such file or directory: glmnet_cf_hyper_select.ipynb
+[W 21:06:14.108 LabApp] No such file or directory: glmnet_cf_hyper_select.ipynb
+[W 21:06:14.108 LabApp] 404 GET /api/contents/glmnet_cf_hyper_select.ipynb?content=0&1602551173890 (172.21.13.10) 4.48ms referer=http://127.0.0.1:20209/lab
+[W 21:06:14.109 LabApp] 404 GET /api/contents/glmnet_mm_hyper_select.ipynb?content=0&1602551173890 (172.21.13.10): No such file or directory: glmnet_mm_hyper_select.ipynb
+[W 21:06:14.109 LabApp] No such file or directory: glmnet_mm_hyper_select.ipynb
+[W 21:06:14.110 LabApp] 404 GET /api/contents/glmnet_mm_hyper_select.ipynb?content=0&1602551173890 (172.21.13.10) 4.85ms referer=http://127.0.0.1:20209/lab
+[W 21:06:14.110 LabApp] 404 GET /api/contents/pyscripts/four_analyte_conv_holdout_allin_no_prob_LB.py?content=0&1602551173891 (172.21.13.10): No such file or directory: pyscripts/four_analyte_conv_holdout_allin_no_prob_LB.py
+[W 21:06:14.111 LabApp] No such file or directory: pyscripts/four_analyte_conv_holdout_allin_no_prob_LB.py
+[W 21:06:14.111 LabApp] 404 GET /api/contents/pyscripts/four_analyte_conv_holdout_allin_no_prob_LB.py?content=0&1602551173891 (172.21.13.10) 5.81ms referer=http://127.0.0.1:20209/lab
+[W 21:06:14.112 LabApp] 404 GET /api/contents/pyscripts/macromicro_conv_holdout.py?content=0&1602551173892 (172.21.13.10): No such file or directory: pyscripts/macromicro_conv_holdout.py
+[W 21:06:14.112 LabApp] No such file or directory: pyscripts/macromicro_conv_holdout.py
+[W 21:06:14.112 LabApp] 404 GET /api/contents/pyscripts/macromicro_conv_holdout.py?content=0&1602551173892 (172.21.13.10) 5.95ms referer=http://127.0.0.1:20209/lab
+[W 21:06:14.159 LabApp] 404 GET /api/contents/mymodels/macromicro_conv_model.py?content=0&1602551173892 (172.21.13.10): No such file or directory: mymodels/macromicro_conv_model.py
+[W 21:06:14.160 LabApp] No such file or directory: mymodels/macromicro_conv_model.py
+[W 21:06:14.160 LabApp] 404 GET /api/contents/mymodels/macromicro_conv_model.py?content=0&1602551173892 (172.21.13.10) 2.77ms referer=http://127.0.0.1:20209/lab
+[W 21:06:14.170 LabApp] 404 GET /api/contents/mymodels/four_analyte_model_bounded.py?content=0&1602551173894 (172.21.13.10): No such file or directory: mymodels/four_analyte_model_bounded.py
+[W 21:06:14.170 LabApp] No such file or directory: mymodels/four_analyte_model_bounded.py
+[W 21:06:14.171 LabApp] 404 GET /api/contents/mymodels/four_analyte_model_bounded.py?content=0&1602551173894 (172.21.13.10) 2.22ms referer=http://127.0.0.1:20209/lab
+[I 21:06:14.407 LabApp] New terminal with automatic name: 1
+[I 21:06:14.467 LabApp] New terminal with automatic name: 2
+[I 21:06:27.986 LabApp] New terminal with automatic name: 3
+[I 21:06:53.067 LabApp] Creating new notebook in /
+[I 21:06:56.816 LabApp] Kernel started: 93ec616c-c944-4a6e-9fab-64743a8ccf25, name: python3
+[I 21:07:13.163 LabApp] New terminal with automatic name: 4
+[I 21:08:56.709 LabApp] Saving file at /Untitled.ipynb
+[I 21:09:51.601 LabApp] Kernel interrupted: 93ec616c-c944-4a6e-9fab-64743a8ccf25
+[I 21:09:55.172 LabApp] Kernel restarted: 93ec616c-c944-4a6e-9fab-64743a8ccf25
+[I 21:10:50.569 LabApp] Creating new notebook in /
+[I 21:10:51.195 LabApp] Kernel started: 8dff415f-05e3-4c3e-85f0-b2d46930c140, name: python3
+slurmstepd: error: *** JOB 12838 ON hawking-gnode01 CANCELLED AT 2020-10-12T21:12:44 ***

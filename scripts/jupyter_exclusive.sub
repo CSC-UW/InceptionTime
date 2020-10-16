@@ -1,0 +1,16 @@
+#!/bin/bash
+#SBATCH --partition=gpuq
+#SBATCH --nodes=1
+#SBATCH --exclusive
+# #SBATCH --cpus-per-task=16
+#SBATCH --gres=gpu:2
+#SBATCH --time=30-00:00:00
+# #SBATCH --mem=128G
+#SBATCH --error=out/j_lab.%j.err
+#SBATCH --output=out/j_lab.%j.out
+
+cd $SLURM_SUBMIT_DIR
+date;hostname;pwd
+source ~/.bashrc
+
+jupyter lab --no-browser --port=$1 --ip=$(hostname -i)

@@ -1,0 +1,20 @@
+which: no fi_info in (/opt/apps/software/TensorFlow/2.2.0-fosscuda-2019b-Python-3.7.4/bin:/opt/apps/software/Miniconda3/4.7.12.1:/opt/apps/software/Miniconda3/4.7.12.1/bin:/opt/apps/software/git/2.23.0-GCCcore-8.3.0-nodocs/bin:/cm/shared/apps/slurm/18.08.4/sbin:/cm/shared/apps/slurm/18.08.4/bin:/opt/apps/software/h5py/2.10.0-fosscuda-2019b-Python-3.7.4/bin:/opt/apps/software/HDF5/1.10.5-gompic-2019b/bin:/opt/apps/software/SciPy-bundle/2019.10-fosscuda-2019b-Python-3.7.4/bin:/opt/apps/software/Python/3.7.4-GCCcore-8.3.0/bin:/opt/apps/software/SQLite/3.29.0-GCCcore-8.3.0/bin:/opt/apps/software/Tcl/8.6.9-GCCcore-8.3.0/bin:/opt/apps/software/bzip2/1.0.8-GCCcore-8.3.0/bin:/opt/apps/software/FFTW/3.3.8-gompic-2019b/bin:/opt/apps/software/OpenMPI/3.1.4-gcccuda-2019b/bin:/opt/apps/software/hwloc/1.11.12-GCCcore-8.3.0/sbin:/opt/apps/software/hwloc/1.11.12-GCCcore-8.3.0/bin:/opt/apps/software/numactl/2.0.12-GCCcore-8.3.0/bin:/opt/apps/software/CUDA/10.1.243-GCC-8.3.0:/opt/apps/software/CUDA/10.1.243-GCC-8.3.0/nvvm/bin:/opt/apps/software/CUDA/10.1.243-GCC-8.3.0/bin:/opt/apps/software/binutils/2.32-GCCcore-8.3.0/bin:/opt/apps/software/Perl/5.30.0-GCCcore-8.3.0/bin:/opt/apps/software/gettext/0.20.1-GCCcore-8.3.0/bin:/opt/apps/software/ncurses/6.1-GCCcore-8.3.0/bin:/opt/apps/software/libxml2/2.9.9-GCCcore-8.3.0/bin:/opt/apps/software/XZ/5.2.4-GCCcore-8.3.0/bin:/opt/apps/software/expat/2.2.7-GCCcore-8.3.0/bin:/opt/apps/software/cURL/7.66.0-GCCcore-8.3.0/bin:/opt/apps/software/GCCcore/8.3.0/bin:/home/leonardo.barbosa/bin:/opt/apps/software/Miniconda3/4.7.12.1/bin:/opt/apps/software/Miniconda3/4.7.12.1/condabin:/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/opt/dell/srvadmin/bin)
+[I 21:54:14.592 LabApp] JupyterLab extension loaded from /home/leonardo.barbosa/.conda/envs/inceptiont/lib/python3.7/site-packages/jupyterlab
+[I 21:54:14.593 LabApp] JupyterLab application directory is /home/leonardo.barbosa/.conda/envs/inceptiont/share/jupyter/lab
+[I 21:54:14.600 LabApp] Serving notebooks from local directory: /home/leonardo.barbosa/projects/voltametry/InceptionTime
+[I 21:54:14.600 LabApp] The Jupyter Notebook is running at:
+[I 21:54:14.600 LabApp] http://172.21.13.51:20209/?token=7d3d9d1fed7d5d308b045fc719e37534712d136f55868855
+[I 21:54:14.600 LabApp]  or http://127.0.0.1:20209/?token=7d3d9d1fed7d5d308b045fc719e37534712d136f55868855
+[I 21:54:14.600 LabApp] Use Control-C to stop this server and shut down all kernels (twice to skip confirmation).
+[C 21:54:14.638 LabApp] 
+    
+    To access the notebook, open this file in a browser:
+        file:///home/leonardo.barbosa/.local/share/jupyter/runtime/nbserver-320421-open.html
+    Or copy and paste one of these URLs:
+        http://172.21.13.51:20209/?token=7d3d9d1fed7d5d308b045fc719e37534712d136f55868855
+     or http://127.0.0.1:20209/?token=7d3d9d1fed7d5d308b045fc719e37534712d136f55868855
+[W 21:54:36.166 LabApp] Could not determine jupyterlab build status without nodejs
+[I 21:54:37.791 LabApp] Kernel started: b989825e-9537-47d4-acf8-aca3f4edc810
+[I 21:54:38.108 LabApp] New terminal with automatic name: 1
+[I 21:54:38.614 LabApp] Kernel started: 321c620b-86be-4dd5-a57b-9b8b3c9b7891
+slurmstepd: error: *** JOB 12851 ON hawking-gnode01 CANCELLED AT 2020-10-12T21:55:42 ***

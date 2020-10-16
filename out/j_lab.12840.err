@@ -1,0 +1,70 @@
+[I 21:19:47.676 LabApp] JupyterLab extension loaded from /home/leonardo.barbosa/.conda/envs/inceptiont/lib/python3.7/site-packages/jupyterlab
+[I 21:19:47.676 LabApp] JupyterLab application directory is /home/leonardo.barbosa/.conda/envs/inceptiont/share/jupyter/lab
+[I 21:19:47.681 LabApp] Serving notebooks from local directory: /home/leonardo.barbosa/projects/voltametry/InceptionTime
+[I 21:19:47.681 LabApp] Jupyter Notebook 6.1.4 is running at:
+[I 21:19:47.681 LabApp] http://172.21.13.51:20207/?token=390bd6267b247696d5c273797f3ad81bd83f099e10f98bed
+[I 21:19:47.681 LabApp]  or http://127.0.0.1:20207/?token=390bd6267b247696d5c273797f3ad81bd83f099e10f98bed
+[I 21:19:47.681 LabApp] Use Control-C to stop this server and shut down all kernels (twice to skip confirmation).
+[C 21:19:47.711 LabApp] 
+    
+    To access the notebook, open this file in a browser:
+        file:///home/leonardo.barbosa/.local/share/jupyter/runtime/nbserver-311905-open.html
+    Or copy and paste one of these URLs:
+        http://172.21.13.51:20207/?token=390bd6267b247696d5c273797f3ad81bd83f099e10f98bed
+     or http://127.0.0.1:20207/?token=390bd6267b247696d5c273797f3ad81bd83f099e10f98bed
+[W 21:21:05.930 LabApp] 404 GET /api/kernels/6bb93844-7dbe-4cb2-9764-59d9f6def1df/channels?session_id=6e84c815-bc62-4b7c-8b9a-122988e14375&token=e49944e55f91b6494aca53aef1304d2394d1503fd3e83660 (172.21.13.10): Kernel does not exist: 6bb93844-7dbe-4cb2-9764-59d9f6def1df
+[W 21:21:06.011 LabApp] 404 GET /api/kernels/6bb93844-7dbe-4cb2-9764-59d9f6def1df/channels?session_id=6e84c815-bc62-4b7c-8b9a-122988e14375&token=e49944e55f91b6494aca53aef1304d2394d1503fd3e83660 (172.21.13.10) 86.08ms referer=None
+[I 21:21:29.970 LabApp] 302 GET /?token=390bd6267b247696d5c273797f3ad81bd83f099e10f98bed (172.21.13.10) 0.96ms
+[E 21:21:31.847 LabApp] Uncaught exception GET /lab/api/settings/?1602552091523 (172.21.13.10)
+    HTTPServerRequest(protocol='http', host='127.0.0.1:20207', method='GET', uri='/lab/api/settings/?1602552091523', version='HTTP/1.1', remote_ip='172.21.13.10')
+    Traceback (most recent call last):
+      File "/home/leonardo.barbosa/.conda/envs/inceptiont/lib/python3.7/site-packages/tornado/web.py", line 1703, in _execute
+        result = await result
+    tornado.iostream.StreamClosedError: Stream is closed
+[I 21:21:31.860 LabApp] 301 GET /lab/workspaces/auto-E/?clone (172.21.13.10) 3.66ms
+[W 21:21:34.343 LabApp] Could not determine jupyterlab build status without nodejs
+[I 21:21:36.265 LabApp] New terminal with automatic name: 1
+[I 21:21:36.905 LabApp] Kernel started: f2e0d63e-8a89-473f-9593-82b715d2d913, name: python3
+[I 21:21:38.689 LabApp] Kernel started: 5a1175ec-a6ee-49b1-b848-7c453cf6f36a, name: python3
+[I 21:21:56.054 LabApp] Kernel interrupted: 5a1175ec-a6ee-49b1-b848-7c453cf6f36a
+[I 21:21:56.662 LabApp] Kernel interrupted: 5a1175ec-a6ee-49b1-b848-7c453cf6f36a
+[I 21:21:56.828 LabApp] Kernel interrupted: 5a1175ec-a6ee-49b1-b848-7c453cf6f36a
+[I 21:21:56.991 LabApp] Kernel interrupted: 5a1175ec-a6ee-49b1-b848-7c453cf6f36a
+[I 21:21:57.164 LabApp] Kernel interrupted: 5a1175ec-a6ee-49b1-b848-7c453cf6f36a
+[I 21:21:57.355 LabApp] Kernel interrupted: 5a1175ec-a6ee-49b1-b848-7c453cf6f36a
+[I 21:21:57.479 LabApp] Kernel interrupted: 5a1175ec-a6ee-49b1-b848-7c453cf6f36a
+[I 21:21:57.730 LabApp] Kernel interrupted: 5a1175ec-a6ee-49b1-b848-7c453cf6f36a
+[W 21:22:06.141 LabApp] 404 GET /api/kernels/8cbf951d-580d-46f7-ac52-d1faedabdd19/channels?session_id=1fcd9a23-4cfb-4d70-a805-d8a7ecdebf6f&token=e49944e55f91b6494aca53aef1304d2394d1503fd3e83660 (172.21.13.10): Kernel does not exist: 8cbf951d-580d-46f7-ac52-d1faedabdd19
+[W 21:22:06.149 LabApp] 404 GET /api/kernels/8cbf951d-580d-46f7-ac52-d1faedabdd19/channels?session_id=1fcd9a23-4cfb-4d70-a805-d8a7ecdebf6f&token=e49944e55f91b6494aca53aef1304d2394d1503fd3e83660 (172.21.13.10) 11.44ms referer=None
+[I 21:22:22.531 LabApp] New terminal with automatic name: 2
+[W 21:23:06.291 LabApp] 404 GET /api/kernels/9ef7ffe6-db61-4106-ae3e-539708f9d4a7/channels?session_id=732d906f-236b-40c9-be1a-07ebaac71224&token=e49944e55f91b6494aca53aef1304d2394d1503fd3e83660 (172.21.13.10): Kernel does not exist: 9ef7ffe6-db61-4106-ae3e-539708f9d4a7
+[W 21:23:06.304 LabApp] 404 GET /api/kernels/9ef7ffe6-db61-4106-ae3e-539708f9d4a7/channels?session_id=732d906f-236b-40c9-be1a-07ebaac71224&token=e49944e55f91b6494aca53aef1304d2394d1503fd3e83660 (172.21.13.10) 16.30ms referer=None
+[I 21:23:22.062 LabApp] 302 GET /?token=390bd6267b247696d5c273797f3ad81bd83f099e10f98be (172.21.13.10) 0.87ms
+[I 21:23:23.190 LabApp] 301 GET /lab/workspaces/auto-d/?clone (172.21.13.10) 1.26ms
+[W 21:23:25.584 LabApp] Could not determine jupyterlab build status without nodejs
+[I 21:23:27.269 LabApp] New terminal with automatic name: 3
+[I 21:23:33.316 LabApp] 301 GET /lab/workspaces/auto-w/?clone (172.21.13.10) 1.41ms
+[W 21:23:34.361 LabApp] Could not determine jupyterlab build status without nodejs
+[I 21:23:36.787 LabApp] New terminal with automatic name: 4
+[W 21:24:06.430 LabApp] 404 GET /api/kernels/9ef7ffe6-db61-4106-ae3e-539708f9d4a7/channels?session_id=0e9c7f16-4e2e-47af-9a48-a1c20dea5707&token=e49944e55f91b6494aca53aef1304d2394d1503fd3e83660 (172.21.13.10): Kernel does not exist: 9ef7ffe6-db61-4106-ae3e-539708f9d4a7
+[W 21:24:06.440 LabApp] 404 GET /api/kernels/9ef7ffe6-db61-4106-ae3e-539708f9d4a7/channels?session_id=0e9c7f16-4e2e-47af-9a48-a1c20dea5707&token=e49944e55f91b6494aca53aef1304d2394d1503fd3e83660 (172.21.13.10) 13.32ms referer=None
+[W 21:25:06.565 LabApp] 404 GET /api/kernels/f4a10895-c2d7-41db-9dda-abaa739974bb/channels?session_id=cac49e45-f75f-4099-a8ff-5dc21d214169&token=e49944e55f91b6494aca53aef1304d2394d1503fd3e83660 (172.21.13.10): Kernel does not exist: f4a10895-c2d7-41db-9dda-abaa739974bb
+[W 21:25:06.575 LabApp] 404 GET /api/kernels/f4a10895-c2d7-41db-9dda-abaa739974bb/channels?session_id=cac49e45-f75f-4099-a8ff-5dc21d214169&token=e49944e55f91b6494aca53aef1304d2394d1503fd3e83660 (172.21.13.10) 13.67ms referer=None
+[I 21:25:37.213 LabApp] Saving file at /Untitled1.ipynb
+[W 21:26:06.703 LabApp] 404 GET /api/kernels/7595bd79-7be9-4404-8cf9-1aa88e309d90/channels?session_id=7396b73e-22b2-46b0-8c84-dde7ed6a8d98&token=e49944e55f91b6494aca53aef1304d2394d1503fd3e83660 (172.21.13.10): Kernel does not exist: 7595bd79-7be9-4404-8cf9-1aa88e309d90
+[W 21:26:06.714 LabApp] 404 GET /api/kernels/7595bd79-7be9-4404-8cf9-1aa88e309d90/channels?session_id=7396b73e-22b2-46b0-8c84-dde7ed6a8d98&token=e49944e55f91b6494aca53aef1304d2394d1503fd3e83660 (172.21.13.10) 14.50ms referer=None
+[W 21:27:06.848 LabApp] 404 GET /api/kernels/29968a30-8261-47b3-945c-a13ccbbb409f/channels?session_id=f12f6a28-d4e0-4fae-b9f6-e6397f53654f&token=e49944e55f91b6494aca53aef1304d2394d1503fd3e83660 (172.21.13.10): Kernel does not exist: 29968a30-8261-47b3-945c-a13ccbbb409f
+[W 21:27:06.865 LabApp] 404 GET /api/kernels/29968a30-8261-47b3-945c-a13ccbbb409f/channels?session_id=f12f6a28-d4e0-4fae-b9f6-e6397f53654f&token=e49944e55f91b6494aca53aef1304d2394d1503fd3e83660 (172.21.13.10) 19.81ms referer=None
+[W 21:28:06.995 LabApp] 404 GET /api/kernels/29968a30-8261-47b3-945c-a13ccbbb409f/channels?session_id=5c10fdbf-b134-48a2-9a5c-491105984207&token=e49944e55f91b6494aca53aef1304d2394d1503fd3e83660 (172.21.13.10): Kernel does not exist: 29968a30-8261-47b3-945c-a13ccbbb409f
+[W 21:28:07.021 LabApp] 404 GET /api/kernels/29968a30-8261-47b3-945c-a13ccbbb409f/channels?session_id=5c10fdbf-b134-48a2-9a5c-491105984207&token=e49944e55f91b6494aca53aef1304d2394d1503fd3e83660 (172.21.13.10) 29.64ms referer=None
+[W 21:29:07.149 LabApp] 404 GET /api/kernels/6bb93844-7dbe-4cb2-9764-59d9f6def1df/channels?session_id=8804d0ed-bdcf-45c9-a066-b10c0493217b&token=e49944e55f91b6494aca53aef1304d2394d1503fd3e83660 (172.21.13.10): Kernel does not exist: 6bb93844-7dbe-4cb2-9764-59d9f6def1df
+[W 21:29:07.209 LabApp] 404 GET /api/kernels/6bb93844-7dbe-4cb2-9764-59d9f6def1df/channels?session_id=8804d0ed-bdcf-45c9-a066-b10c0493217b&token=e49944e55f91b6494aca53aef1304d2394d1503fd3e83660 (172.21.13.10) 62.98ms referer=None
+[W 21:30:07.346 LabApp] 404 GET /api/kernels/f4a10895-c2d7-41db-9dda-abaa739974bb/channels?session_id=0e528553-debc-4340-89ee-ee19cef70e78&token=e49944e55f91b6494aca53aef1304d2394d1503fd3e83660 (172.21.13.10): Kernel does not exist: f4a10895-c2d7-41db-9dda-abaa739974bb
+[W 21:30:07.368 LabApp] 404 GET /api/kernels/f4a10895-c2d7-41db-9dda-abaa739974bb/channels?session_id=0e528553-debc-4340-89ee-ee19cef70e78&token=e49944e55f91b6494aca53aef1304d2394d1503fd3e83660 (172.21.13.10) 25.49ms referer=None
+[W 21:31:07.515 LabApp] 404 GET /api/kernels/6f24fc6c-a439-465c-a611-de3a2dd4f078/channels?session_id=be9ee881-78bf-4dd4-9250-0d1087ffc36b&token=e49944e55f91b6494aca53aef1304d2394d1503fd3e83660 (172.21.13.10): Kernel does not exist: 6f24fc6c-a439-465c-a611-de3a2dd4f078
+[W 21:31:07.536 LabApp] 404 GET /api/kernels/6f24fc6c-a439-465c-a611-de3a2dd4f078/channels?session_id=be9ee881-78bf-4dd4-9250-0d1087ffc36b&token=e49944e55f91b6494aca53aef1304d2394d1503fd3e83660 (172.21.13.10) 24.69ms referer=None
+[W 21:32:07.665 LabApp] 404 GET /api/kernels/78cef62f-0394-4ed5-a95d-e35fffda1408/channels?session_id=cb398cd4-15ee-4732-aa1e-eada0e74da19&token=e49944e55f91b6494aca53aef1304d2394d1503fd3e83660 (172.21.13.10): Kernel does not exist: 78cef62f-0394-4ed5-a95d-e35fffda1408
+[W 21:32:07.695 LabApp] 404 GET /api/kernels/78cef62f-0394-4ed5-a95d-e35fffda1408/channels?session_id=cb398cd4-15ee-4732-aa1e-eada0e74da19&token=e49944e55f91b6494aca53aef1304d2394d1503fd3e83660 (172.21.13.10) 33.70ms referer=None
+[W 21:33:07.829 LabApp] 404 GET /api/kernels/78cef62f-0394-4ed5-a95d-e35fffda1408/channels?session_id=2e03c4e9-1a0d-43d9-9acd-2649389780a5&token=e49944e55f91b6494aca53aef1304d2394d1503fd3e83660 (172.21.13.10): Kernel does not exist: 78cef62f-0394-4ed5-a95d-e35fffda1408
+[W 21:33:07.851 LabApp] 404 GET /api/kernels/78cef62f-0394-4ed5-a95d-e35fffda1408/channels?session_id=2e03c4e9-1a0d-43d9-9acd-2649389780a5&token=e49944e55f91b6494aca53aef1304d2394d1503fd3e83660 (172.21.13.10) 25.82ms referer=None
+slurmstepd: error: *** JOB 12840 ON hawking-gnode01 CANCELLED AT 2020-10-12T21:33:15 ***
