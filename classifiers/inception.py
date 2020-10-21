@@ -2,10 +2,10 @@
 import keras
 import numpy as np
 import time
+import pandas as pd
 
-from utils.utils import save_logs
-from utils.utils import calculate_metrics
-from utils.utils import save_test_duration
+from utils.utils import save_logs, plot_epochs_metric, calculate_metrics, save_test_duration
+from utils.data_loading import tf_pmse, tf_pmse_cf, rmse
 
 import tensorflow.compat.v1 as tf
 tf.disable_v2_behavior()
@@ -166,11 +166,12 @@ class Classifier_INCEPTION:
             save_test_duration(self.output_directory + 'test_duration.csv', test_duration)
             return y_pred
 
+
 class Regression_INCEPTION:
 
     def __init__(self, output_directory, input_shape, output_shape, verbose=False, build=True, batch_size=64,
                  nb_filters=32, use_residual=True, use_bottleneck=True, depth=6, kernel_size=41, nb_epochs=100,
-                pre_model=None):
+                metrics=None, pre_model=None, revert_data=lambda x: x):
 
         self.output_directory = output_directory
 
@@ -183,6 +184,9 @@ class Regression_INCEPTION:
         self.batch_size = batch_size
         self.bottleneck_size = 32
         self.nb_epochs = nb_epochs
+        self.metrics = metrics
+        self.pre_model = pre_model
+        self.revert_data = revert_data
 
         if build == True:
             self.model = self.build_model(input_shape, output_shape, pre_model=pre_model)
@@ -195,8 +199,8 @@ class Regression_INCEPTION:
     def _calculate_metrics(self, y_true, y_pred, duration):
         res = pd.DataFrame(data=np.zeros((1, 5), dtype=np.float), index=[0],
                            columns=['rmse_DA', 'rmse_5HT', 'rmse_pH', 'rmse_NE', 'duration'])
-        y_pred = np.apply_along_axis(revert_data, axis=1, arr=y_pred) 
-        y_true = np.apply_along_axis(revert_data, axis=1, arr=y_true) 
+        y_pred = np.apply_along_axis(self.revert_data, axis=1, arr=y_pred) 
+        y_true = np.apply_along_axis(self.revert_data, axis=1, arr=y_true) 
 #         rmse(y_true, y_pred, multioutput='uniform_average')
         rmse4 = rmse(y_true, y_pred)
         res['rmse_DA'] = rmse4[0]
@@ -286,6 +290,11 @@ class Regression_INCEPTION:
         return x
 
     def build_model(self, input_shape, output_shape, pre_model=None):
+        
+        mirrored_strategy = tf.distribute.MirroredStrategy()
+
+#         with mirrored_strategy.scope():
+
         input_layer = keras.layers.Input(input_shape)
 
         x = input_layer
@@ -298,24 +307,38 @@ class Regression_INCEPTION:
             if self.use_residual and d % 3 == 2:
                 x = self._shortcut_layer(input_res, x)
                 input_res = x
+        
+#         print('')
+#         print('NO GAP LAYER!!!')
+#         print('')
+#         gap_layer = x
 
         gap_layer = keras.layers.GlobalAveragePooling1D()(x)
 
+#         output_layer = keras.layers.Dense(output_shape, activation='relu')(gap_layer)
         output_layer = keras.layers.Dense(output_shape, activation='softplus')(gap_layer)
 
         model = keras.models.Model(inputs=input_layer, outputs=output_layer)
 
         if not pre_model is None:
-            print('loading previous weights...')
-#             for i in range(len(model.layers)-1):
-            for i in range(len(model.layers)):
+            print('loading previous weights (L-1 layers)...')
+            for i in range(len(model.layers)-1):
                 model.layers[i].set_weights(pre_model.layers[i].get_weights())
         else:
             print('starting model from scratch...')
 
 #         model.compile(loss='mse', optimizer=keras.optimizers.Adam(), metrics=[])
 #         model.compile(loss='mse', optimizer=keras.optimizers.Adam(), metrics=[tf_pmse])
-        model.compile(loss='mse', optimizer=keras.optimizers.Adam(), metrics=[tf_pmse_DA, tf_pmse_5HT, tf_pmse_pH, tf_pmse_NE])
+        if self.metrics is None:
+            metrics = []
+        else:
+            metrics = self.metrics
+    
+#         print('Compiling with Adadelta and metrics: ', [m.__name__ for m in metrics])
+#         model.compile(loss='mse', optimizer=keras.optimizers.Adadelta(), metrics=metrics)
+        print('Compiling with Adam and metrics: ', [m.__name__ for m in metrics])
+        model.compile(loss='mse', optimizer=keras.optimizers.Adam(), metrics=metrics)
+
 #         model.compile(loss='mse', optimizer=keras.optimizers.Adam(), metrics=['root_mean_squared_error'])
 
         reduce_lr = keras.callbacks.ReduceLROnPlateau(monitor='loss', factor=0.5, patience=50, min_lr=0.0001)
@@ -384,5 +407,10 @@ class Regression_INCEPTION:
 
     def get_best_model(self):
         model_path = self.output_directory + 'best_model.hdf5'
-        return keras.models.load_model(model_path, 
-                                        custom_objects={"tf_pmse_DA": tf_pmse_DA, "tf_pmse_5HT": tf_pmse_5HT, "tf_pmse_pH": tf_pmse_pH, "tf_pmse_NE": tf_pmse_NE})  
+#         "tf_pmse_DA": tf_pmse_DA, "tf_pmse_5HT": tf_pmse_5HT, "tf_pmse_pH": tf_pmse_pH, "tf_pmse_NE": tf_pmse_NE
+        custom_objects = {}
+        if not self.metrics is None:
+            for metric in self.metrics:
+                custom_objects[metric.__name__] = metric
+#         print('custom_objects: ', custom_objects)
+        return keras.models.load_model(model_path, custom_objects=custom_objects)  

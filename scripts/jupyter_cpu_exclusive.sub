@@ -1,0 +1,19 @@
+#!/bin/bash
+#SBATCH --partition=computeq
+#SBATCH --job-name=jupyter
+#SBATCH --nodes=1
+#SBATCH --ntasks=1
+#SBATCH --exclusive
+#SBATCH --mail-user=leonardo.barbosa@wisc.edu
+#SBATCH --mail-type=begin
+#SBATCH --mail-type=end
+# #SBATCH --array=1-5
+#SBATCH --time=30-00:00:00
+#SBATCH --error=out/j_lab.%j.err
+#SBATCH --output=out/j_lab.%j.out
+
+cd $SLURM_SUBMIT_DIR
+date;hostname;pwd
+source ~/.bashrc
+
+jupyter lab --no-browser --port=$1 --ip=$(hostname -i)

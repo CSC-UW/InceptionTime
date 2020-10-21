@@ -4,7 +4,6 @@ import pandas as pd
 import matplotlib
 import random
 
-matplotlib.use('agg')
 import matplotlib.pyplot as plt
 
 # matplotlib.rcParams['font.family'] = 'sans-serif'
@@ -177,7 +176,13 @@ def generate_results_csv(output_file_name, root_dir, clfs):
 
 
 def plot_epochs_metric(hist, file_name, metric='loss'):
-    plt.figure()
+    # change renderer for saving plots to file, then put it back
+    
+    ori = matplotlib.get_backend()
+    print('original backend %s'%ori)
+    matplotlib.use('agg')
+
+    plt.figure(figsize=(12, 5))
     plt.plot(hist.history[metric])
     plt.plot(hist.history['val_' + metric])
     plt.title('model ' + metric)
@@ -187,7 +192,8 @@ def plot_epochs_metric(hist, file_name, metric='loss'):
     plt.savefig(file_name, bbox_inches='tight')
     plt.close()
 
-
+    matplotlib.use(ori)
+    
 def save_logs(output_directory, hist, y_pred, y_true, duration,
               lr=True, plot_test_acc=True):
     hist_df = pd.DataFrame(hist.history)

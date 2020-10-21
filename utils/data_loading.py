@@ -220,11 +220,15 @@ def load_matlab(vfiles, nrecords_per_session=150, split=1.0, asnumpy=False, proj
     print(y.shape)
 
     idxs = np.random.permutation(x.shape[0])
+    
     lim = int(x.shape[0]*split)
     d1idx = idxs[idxs[:lim]]
     d2idx = idxs[idxs[lim:]]
     x_1, y_1 = x[d1idx,:], y[d1idx,:]
     x_2, y_2 = x[d2idx,:], y[d2idx,:]
+
+    x = x[idxs,:]
+    y = y[idxs,:]
     
     if asnumpy:
         if split == 1.0:
@@ -235,10 +239,6 @@ def load_matlab(vfiles, nrecords_per_session=150, split=1.0, asnumpy=False, proj
         if split == 1.0:
             d1 = tf.data.Dataset.from_tensor_slices((x, y))
         else:
-            idxs = np.random.permutation(x.shape[0])
-            lim = int(x.shape[0]*split)
-            d1idx = idxs[idxs[:lim]]
-            d2idx = idxs[idxs[lim:]]
             d1 = tf.data.Dataset.from_tensor_slices((x_1, y_1))
             d2 = tf.data.Dataset.from_tensor_slices((x_2, y_2))
 
@@ -250,7 +250,8 @@ def get_multiple_data(prefix,
                       number_of_minibatches=20,
                       normalize_data=shifted_zscore,
                       filter_files=None,
-                      nrecords_per_session=1):
+                      nrecords_per_session=1,
+                      input_interval=None):
     '''Obtains tfrecords files for specific probes under a prefix directory
     Arguments:
         prefix : str
@@ -309,6 +310,12 @@ def get_multiple_data(prefix,
         print('number of train files %d'%len(train_files))
         x_train, y_train = load_matlab(train_files, nrecords_per_session, asnumpy=True, proj_y=normalize_data)
 
+    if not input_interval is None:
+        print('selecting x values from %d to %d'%(input_interval[0], input_interval[1]))
+        x_train = x_train[:, input_interval[0]:input_interval[1]]
+        x_val = x_val[:, input_interval[0]:input_interval[1]]
+        x_test = x_test[:, input_interval[0]:input_interval[1]]
+        
     return x_train, y_train, x_val, y_val, x_test, y_test
 
 
@@ -394,7 +401,7 @@ def get_multiple_data_cf(prefix,
             y_probe = np.concatenate(u_y)
 
         y_probe = np.apply_along_axis(normalize_data, axis=1, arr=y_probe) 
-        print(x_probe.shape, y_probe.shape)
+#         print(x_probe.shape, y_probe.shape)
         
         if probe == hold_probe:
             x_test = x_probe
