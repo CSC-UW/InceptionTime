@@ -177,42 +177,37 @@ def shifted_zscore(x, inverse=False):
     
     return x
 
-def load_matlab(vfiles, nrecords_per_session=150, split=1.0, asnumpy=False, proj_y=shifted_zscore):
+def load_matlab(vfiles, n_records_per_label_per_probe=10, split=1.0, asnumpy=False, proj_y=shifted_zscore):
     yv = []
     yl = []
     for v in vfiles:
-#         print()
-#         print(v)
         bv = np.array(loadmat(v)['voltammograms'])
         bl = np.array(loadmat(v.replace('voltammograms.mat', 'labels.mat'))['labels'])
 
+        # iterate through matlab cell contents (one label per cell element?)
         for (xv, xl) in zip(bv,bl):
-#             a = xv[0][:,:nrecords_per_session].T
-#             a = np.apply_along_axis(np.diff, axis=1, arr=a) 
-#             b = xl[0][:nrecords_per_session,:4]
-#             b = np.apply_along_axis(proj_y, axis=1, arr=b) 
-#             yv.append(a.astype(npdt))
-#             yl.append(b.astype(npdt))
-            v = xv[0].T
+            v = xv[0].T # voltammetry
             v = np.apply_along_axis(np.diff, axis=1, arr=v) 
-            l = xl[0][:,:4]
+            l = xl[0][:,:4] # labels (concentrations)
             l = np.apply_along_axis(proj_y, axis=1, arr=l) 
             v = v.astype(npdt)
             l = l.astype(npdt)
-#             yv.append()
-#             yl.append()
 
-            if nrecords_per_session == 1:
+            # get n unique records per label (tuple), or all data (-1)
+            if n_records_per_label_per_probe > -1:
+                # just to make sure there is only once concertraiton tuple in this record
                 _, ulidx = np.unique(l, return_index=True, axis=0)
-#                 print('one per concentration: %d'%len(ulidx))
-                yv.append(v[ulidx,:])
-                yl.append(l[ulidx,:])
-            elif nrecords_per_session > 0:
-                yv.append(v[:nrecords_per_session,:])
-                yl.append(l[:nrecords_per_session,:])
-            else:
-                yv.append(v)
-                yl.append(l)
+                u_v = []
+                u_l = []
+                for idx in ulidx:
+                    # TODO: I think this can come from unique
+                    one_label_idxs = np.where((l == l[idx,:]).all(axis=1))[0]
+                    u_v.append(v[one_label_idxs[:n_records_per_label_per_probe], :])
+                    u_l.append(l[one_label_idxs[:n_records_per_label_per_probe], :])
+                v = np.concatenate(u_v)
+                l = np.concatenate(u_l)
+            yv.append(v)
+            yl.append(l)
 
     x = np.vstack(yv)
     print(x.shape)
