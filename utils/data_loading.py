@@ -6,22 +6,10 @@ import warnings
 
 import h5py as h5
 import numpy as np
-from sklearn.metrics import mean_squared_error
 from scipy.io import loadmat
 
 import tensorflow.compat.v1 as tf
 tf.disable_v2_behavior()
-
-# # import tensorflow_io as tfio
-# import tensorflow_probability as tfp
-
-# tfk = tf.keras
-# tfkl = tf.keras.layers
-# tfkr = tf.keras.regularizers
-# tfpl = tfp.layers
-# tfd = tfp.distributions
-# tfb = tfp.bijectors
-# tf.keras.backend.set_floatx('float32')
 
 dtype = tf.float32
 npdt = np.float32
@@ -69,27 +57,6 @@ def tf_pmse_cf(y_true, y_pred, idx=-1):
 
 def tf_rmse(y_true, y_pred):
     return tf.sqrt(tf.reduce_mean((y_true - y_pred)**2))
-
-def rmse(ytrue, ypred, multioutput='raw_values'):
-    '''Wrapper around sklearn's mean_squared_error.
-    
-    Arguments:
-        ytrue : np.ndarray
-            Array containing true values, shape (samples, analytes)
-        ypred : np.ndarray
-            Array containing predicted values, shape (samples, analytes)
-        multioutput : str, optional
-            See sklearn.metrics multioutput options
-
-    Returns:
-        np.ndarray containing RMSE across samples, shape (analytes)
-    '''
-    return np.sqrt(
-        mean_squared_error(
-            ytrue,
-            ypred,
-            # squared=False,
-            multioutput=multioutput))
 
 def print_metric(metric, names, ytrue, ypred):
     '''Prints regression performance metric
@@ -177,7 +144,7 @@ def shifted_zscore(x, inverse=False):
     
     return x
 
-def load_matlab(vfiles, n_records_per_label_per_probe=10, split=1.0, asnumpy=False, proj_y=shifted_zscore):
+def load_matlab(vfiles, n_records_per_label_per_probe=10, split=1.0, asnumpy=False, proj_y=shifted_zscore, jitter=None):
     yv = []
     yl = []
     for v in vfiles:
@@ -206,6 +173,13 @@ def load_matlab(vfiles, n_records_per_label_per_probe=10, split=1.0, asnumpy=Fal
                     u_l.append(l[one_label_idxs[:n_records_per_label_per_probe], :])
                 v = np.concatenate(u_v)
                 l = np.concatenate(u_l)
+                
+            
+            if jitter is not None:
+                js = np.random.randint(-jitter, jitter, v.shape[0])
+                for (iv, v1) in enumerate(v):
+                    v[iv,:] = np.roll(v1, js[iv])
+
             yv.append(v)
             yl.append(l)
 
@@ -246,7 +220,8 @@ def get_multiple_data(prefix,
                       normalize_data=shifted_zscore,
                       filter_files=None,
                       nrecords_per_session=1,
-                      input_interval=None):
+                      input_interval=None,
+                      jitter=None):
     '''Obtains tfrecords files for specific probes under a prefix directory
     Arguments:
         prefix : str
@@ -287,23 +262,23 @@ def get_multiple_data(prefix,
     else:
         holdout_files = list(compress(voltammograms, [x.find(holdout) > -1 for x in voltammograms]))
         print('number of holdout files %d'%len(holdout_files))
-        x_test, y_test = load_matlab(holdout_files, nrecords_per_session, asnumpy=True, proj_y=normalize_data)
+        x_test, y_test = load_matlab(holdout_files, nrecords_per_session, asnumpy=True, proj_y=normalize_data, jitter=jitter)
 
         train_val_files = list(compress(voltammograms, [x.find(holdout) == -1 for x in voltammograms]))
 
     if val_probe is None:
         print('number of train/val files %d'%len(train_val_files))
-        x_train, y_train, x_val, y_val = load_matlab(train_val_files, nrecords_per_session, split=data_split, asnumpy=True, proj_y=normalize_data)
+        x_train, y_train, x_val, y_val = load_matlab(train_val_files, nrecords_per_session, split=data_split, asnumpy=True, proj_y=normalize_data, jitter=jitter)
     else:
         print('validation probe: %s'%val_probe)
         
         val_files = list(compress(train_val_files, [x.find(val_probe) > -1 for x in train_val_files]))
         print('number of validation files %d'%len(val_files))
-        x_val, y_val = load_matlab(val_files, nrecords_per_session, asnumpy=True, proj_y=normalize_data)
+        x_val, y_val = load_matlab(val_files, nrecords_per_session, asnumpy=True, proj_y=normalize_data, jitter=jitter)
         
         train_files = list(compress(train_val_files, [x.find(val_probe) == -1 for x in train_val_files]))
         print('number of train files %d'%len(train_files))
-        x_train, y_train = load_matlab(train_files, nrecords_per_session, asnumpy=True, proj_y=normalize_data)
+        x_train, y_train = load_matlab(train_files, nrecords_per_session, asnumpy=True, proj_y=normalize_data, jitter=jitter)
 
     if not input_interval is None:
         print('selecting x values from %d to %d'%(input_interval[0], input_interval[1]))
@@ -372,7 +347,8 @@ def get_multiple_data_cf(prefix,
                       val_probe=None,
                       normalize_data=shifted_zscore_cf,
                       val_ratio=.1,
-                      n_records_per_probe=-1):
+                      n_records_per_probe=-1,
+                      jitter=None):
     
     x_train_probes = []
     y_train_probes = []
@@ -396,7 +372,13 @@ def get_multiple_data_cf(prefix,
             y_probe = np.concatenate(u_y)
 
         y_probe = np.apply_along_axis(normalize_data, axis=1, arr=y_probe) 
+        
 #         print(x_probe.shape, y_probe.shape)
+
+        if jitter is not None:
+            js = np.random.randint(-jitter, jitter, x_probe.shape[0])
+            for (ix, x) in enumerate(x_probe):
+                x_probe[ix,:] = np.roll(x, js[ix])
         
         if probe == hold_probe:
             x_test = x_probe
@@ -407,7 +389,8 @@ def get_multiple_data_cf(prefix,
         else:
             x_train_probes.append(x_probe)
             y_train_probes.append(y_probe)
-            
+        
+        
     x_train = np.concatenate(x_train_probes)
     y_train = np.concatenate(y_train_probes)
     

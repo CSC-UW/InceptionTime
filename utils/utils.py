@@ -19,8 +19,30 @@ from utils.constants import UNIVARIATE_ARCHIVE_NAMES  as ARCHIVE_NAMES
 from sklearn.metrics import accuracy_score
 from sklearn.metrics import precision_score
 from sklearn.metrics import recall_score
+from sklearn.metrics import mean_squared_error
 from sklearn.preprocessing import LabelEncoder
 
+
+def rmse(ytrue, ypred, multioutput='raw_values'):
+    '''Wrapper around sklearn's mean_squared_error.
+    
+    Arguments:
+        ytrue : np.ndarray
+            Array containing true values, shape (samples, analytes)
+        ypred : np.ndarray
+            Array containing predicted values, shape (samples, analytes)
+        multioutput : str, optional
+            See sklearn.metrics multioutput options
+
+    Returns:
+        np.ndarray containing RMSE across samples, shape (analytes)
+    '''
+    return np.sqrt(
+        mean_squared_error(
+            ytrue,
+            ypred,
+            # squared=False,
+            multioutput=multioutput))
 
 def check_if_file_exits(file_name):
     return os.path.exists(file_name)

@@ -4,12 +4,11 @@ import numpy as np
 import time
 import pandas as pd
 
-from utils.utils import save_logs, plot_epochs_metric, calculate_metrics, save_test_duration
-from utils.data_loading import tf_pmse, tf_pmse_cf, rmse
+from utils.utils import save_logs, plot_epochs_metric, calculate_metrics, save_test_duration, rmse
+from utils.data_loading import tf_pmse, tf_pmse_cf
 
 import tensorflow.compat.v1 as tf
 tf.disable_v2_behavior()
-
 
 class Classifier_INCEPTION:
 
@@ -171,7 +170,7 @@ class Regression_INCEPTION:
 
     def __init__(self, output_directory, input_shape, output_shape, verbose=False, build=True, batch_size=64,
                  nb_filters=32, use_residual=True, use_bottleneck=True, depth=6, kernel_size=41, nb_epochs=100,
-                metrics=None, pre_model=None, revert_data=lambda x: x):
+                metrics=None, pre_model=None, normalize_y=(lambda x: x, lambda x: x):
 
         self.output_directory = output_directory
 
@@ -186,7 +185,8 @@ class Regression_INCEPTION:
         self.nb_epochs = nb_epochs
         self.metrics = metrics
         self.pre_model = pre_model
-        self.revert_data = revert_data
+        self.normalize_data = normalize_y[0]
+        self.revert_data = normalize_y[1]
 
         if build == True:
             self.model = self.build_model(input_shape, output_shape, pre_model=pre_model)
@@ -201,7 +201,6 @@ class Regression_INCEPTION:
                            columns=['rmse_DA', 'rmse_5HT', 'rmse_pH', 'rmse_NE', 'duration'])
         y_pred = np.apply_along_axis(self.revert_data, axis=1, arr=y_pred) 
         y_true = np.apply_along_axis(self.revert_data, axis=1, arr=y_true) 
-#         rmse(y_true, y_pred, multioutput='uniform_average')
         rmse4 = rmse(y_true, y_pred)
         res['rmse_DA'] = rmse4[0]
         res['rmse_5HT'] = rmse4[1]
@@ -293,63 +292,63 @@ class Regression_INCEPTION:
         
         mirrored_strategy = tf.distribute.MirroredStrategy()
 
-#         with mirrored_strategy.scope():
+        with mirrored_strategy.scope():
 
-        input_layer = keras.layers.Input(input_shape)
+            input_layer = keras.layers.Input(input_shape)
 
-        x = input_layer
-        input_res = input_layer
+            x = input_layer
+            input_res = input_layer
 
-        for d in range(self.depth):
+            for d in range(self.depth):
 
-            x = self._inception_module(x)
+                x = self._inception_module(x)
 
-            if self.use_residual and d % 3 == 2:
-                x = self._shortcut_layer(input_res, x)
-                input_res = x
-        
-#         print('')
-#         print('NO GAP LAYER!!!')
-#         print('')
-#         gap_layer = x
+                if self.use_residual and d % 3 == 2:
+                    x = self._shortcut_layer(input_res, x)
+                    input_res = x
 
-        gap_layer = keras.layers.GlobalAveragePooling1D()(x)
+    #         print('')
+    #         print('NO GAP LAYER!!!')
+    #         print('')
+    #         gap_layer = x
 
-#         output_layer = keras.layers.Dense(output_shape, activation='relu')(gap_layer)
-        output_layer = keras.layers.Dense(output_shape, activation='softplus')(gap_layer)
+            gap_layer = keras.layers.GlobalAveragePooling1D()(x)
 
-        model = keras.models.Model(inputs=input_layer, outputs=output_layer)
+    #         output_layer = keras.layers.Dense(output_shape, activation='relu')(gap_layer)
+            output_layer = keras.layers.Dense(output_shape, activation='softplus')(gap_layer)
 
-        if not pre_model is None:
-            print('loading previous weights (L-1 layers)...')
-            for i in range(len(model.layers)-1):
-                model.layers[i].set_weights(pre_model.layers[i].get_weights())
-        else:
-            print('starting model from scratch...')
+            model = keras.models.Model(inputs=input_layer, outputs=output_layer)
 
-#         model.compile(loss='mse', optimizer=keras.optimizers.Adam(), metrics=[])
-#         model.compile(loss='mse', optimizer=keras.optimizers.Adam(), metrics=[tf_pmse])
-        if self.metrics is None:
-            metrics = []
-        else:
-            metrics = self.metrics
-    
-#         print('Compiling with Adadelta and metrics: ', [m.__name__ for m in metrics])
-#         model.compile(loss='mse', optimizer=keras.optimizers.Adadelta(), metrics=metrics)
-        print('Compiling with Adam and metrics: ', [m.__name__ for m in metrics])
-        model.compile(loss='mse', optimizer=keras.optimizers.Adam(), metrics=metrics)
+            if not pre_model is None:
+                print('loading previous weights (L-1 layers)...')
+                for i in range(len(model.layers)-1):
+                    model.layers[i].set_weights(pre_model.layers[i].get_weights())
+            else:
+                print('starting model from scratch...')
 
-#         model.compile(loss='mse', optimizer=keras.optimizers.Adam(), metrics=['root_mean_squared_error'])
+    #         model.compile(loss='mse', optimizer=keras.optimizers.Adam(), metrics=[])
+    #         model.compile(loss='mse', optimizer=keras.optimizers.Adam(), metrics=[tf_pmse])
+            if self.metrics is None:
+                metrics = []
+            else:
+                metrics = self.metrics
 
-        reduce_lr = keras.callbacks.ReduceLROnPlateau(monitor='loss', factor=0.5, patience=50, min_lr=0.0001)
+    #         print('Compiling with Adadelta and metrics: ', [m.__name__ for m in metrics])
+    #         model.compile(loss='mse', optimizer=keras.optimizers.Adadelta(), metrics=metrics)
+            print('Compiling with Adam and metrics: ', [m.__name__ for m in metrics])
+            model.compile(loss='mse', optimizer=keras.optimizers.Adam(), metrics=metrics)
 
-        file_path = self.output_directory + 'best_model.hdf5'
-        model_checkpoint_val = keras.callbacks.ModelCheckpoint(filepath=file_path, monitor='val_loss', save_best_only=True)
+    #         model.compile(loss='mse', optimizer=keras.optimizers.Adam(), metrics=['root_mean_squared_error'])
 
-        file_path = self.output_directory + 'best_train_model.hdf5'
-        model_checkpoint_train = keras.callbacks.ModelCheckpoint(filepath=file_path, monitor='loss', save_best_only=True)
+            reduce_lr = keras.callbacks.ReduceLROnPlateau(monitor='loss', factor=0.5, patience=50, min_lr=0.0001)
 
-        self.callbacks = [reduce_lr, model_checkpoint_train, model_checkpoint_val]
+            file_path = self.output_directory + 'best_model.hdf5'
+            model_checkpoint_val = keras.callbacks.ModelCheckpoint(filepath=file_path, monitor='val_loss', save_best_only=True)
+
+            file_path = self.output_directory + 'best_train_model.hdf5'
+            model_checkpoint_train = keras.callbacks.ModelCheckpoint(filepath=file_path, monitor='loss', save_best_only=True)
+
+            self.callbacks = [reduce_lr, model_checkpoint_train, model_checkpoint_val]
 
         return model
 
@@ -368,6 +367,10 @@ class Regression_INCEPTION:
             
         start_time = time.time()
 
+        print(f'projecting y_train and y_val with {self.normalize_data.__name__}')
+        y_train = np.apply_along_axis(self.normalize_data, axis=1, arr=y_train) 
+        y_val = np.apply_along_axis(self.normalize_data, axis=1, arr=y_val) 
+        
         if plot_test_acc:
             hist = self.model.fit(x_train, y_train, batch_size=mini_batch_size, epochs=self.nb_epochs,
                                   verbose=self.verbose, validation_data=(x_val, y_val), callbacks=self.callbacks)
@@ -385,7 +388,8 @@ class Regression_INCEPTION:
         print(' done.')
 
         # save predictions
-        np.save(self.output_directory + 'y_pred.npy', y_pred)
+        np.save(self.output_directory + 'y_pred.npy', np.apply_along_axis(self.revert_data, axis=1, arr=y_pred))
+        np.save(self.output_directory + 'y_true.npy', np.apply_along_axis(self.revert_data, axis=1, arr=y_true))
 
         df_metrics = self._save_logs(hist, y_pred, y_val, duration, plot_test_acc=plot_test_acc)
 
